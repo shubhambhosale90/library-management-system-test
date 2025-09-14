@@ -69,6 +69,7 @@ public class AuthorService {
         }
         modelMapper.map(authorDto, author);
         author.setId(authorId);
+        author = authorRepository.save(author);
         log.info("Successfully updated author with ID : {}", authorId);
         return modelMapper.map(author, AuthorDto.class);
     }

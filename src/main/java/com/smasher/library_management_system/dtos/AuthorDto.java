@@ -13,5 +13,5 @@ public class AuthorDto {
     private Long id;
     private String name;
     private String email;
-    private List<Book> book;
+    private List<BookDto> book;
 }
