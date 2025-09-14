@@ -1,5 +1,6 @@
 package com.smasher.library_management_system.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smasher.library_management_system.entities.Book;
 import jakarta.persistence.OneToMany;
 import lombok.Data;

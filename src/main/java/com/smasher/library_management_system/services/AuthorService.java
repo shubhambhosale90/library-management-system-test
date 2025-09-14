@@ -22,7 +22,7 @@ public class AuthorService {
     public AuthorDto createNewAuthor(AuthorDto authorDto) {
         log.info("Creating Author with email : {}", authorDto.getEmail());
         List<Author> authors = authorRepository.findByEmail(authorDto.getEmail()).orElse(null);
-        if(authors != null) {
+        if(!authors.isEmpty()) {
             log.error("Author already exists with Email : {}", authorDto.getEmail());
             throw  new RuntimeException("Author already exists with Email : "+authorDto.getEmail());
         }

@@ -10,10 +10,10 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/author")
+@RequestMapping(path = "/author")
 public class AuthorController {
 
-    private AuthorService authorService;
+    private final AuthorService authorService;
 
     @PostMapping
     public ResponseEntity<AuthorDto> createNewAuthor(@RequestBody AuthorDto authorDto) {
@@ -27,19 +27,19 @@ public class AuthorController {
         return ResponseEntity.ok(authors);
     }
 
-    @GetMapping("/{authorId}")
+    @GetMapping(path = "/{authorId}")
     public ResponseEntity<AuthorDto> getAuthorById(@PathVariable Long authorId) {
         AuthorDto author = authorService.getAuthorById(authorId);
         return ResponseEntity.ok(author);
     }
 
-    @PutMapping("/{authorId}")
+    @PutMapping(path = "/{authorId}")
     public ResponseEntity<AuthorDto> updateAuthorById(@PathVariable Long authorId, @RequestBody AuthorDto authorDto) {
         AuthorDto author = authorService.updateAuthorById(authorId, authorDto);
         return ResponseEntity.ok(author);
     }
 
-    @DeleteMapping("/{authorId}")
+    @DeleteMapping(path = "/{authorId}")
     public ResponseEntity<Void> deleteAuthorById(@PathVariable Long authorId) {
         authorService.deleteAuthorById(authorId);
         return ResponseEntity.noContent().build();
