@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,13 +22,13 @@ public class AuthorService {
 
     public AuthorDto createNewAuthor(AuthorDto authorDto) {
         log.info("Creating Author with email : {}", authorDto.getEmail());
-        List<Author> authors = authorRepository.findByEmail(authorDto.getEmail()).orElse(null);
+        List<Author> authors = authorRepository.findByEmail(authorDto.getEmail()).orElse(Collections.emptyList());
         if(!authors.isEmpty()) {
             log.error("Author already exists with Email : {}", authorDto.getEmail());
             throw  new RuntimeException("Author already exists with Email : "+authorDto.getEmail());
         }
         Author author = modelMapper.map(authorDto, Author.class);
-        Author savedAuthor = authorRepository.saveAndFlush(author);
+        Author savedAuthor = authorRepository.save(author);
         log.info("Successfully saved Author with email : {}", savedAuthor.getEmail());
         return modelMapper.map(savedAuthor, AuthorDto.class);
     }
